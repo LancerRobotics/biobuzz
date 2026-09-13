@@ -54,12 +54,9 @@ TeamCode/
 ├── src/main/java/org/firstinspires/ftc/teamcode/
 │   ├── opmodes/        # Autonomous and TeleOp programs
 │   ├── subsystems/     # Robot mechanism controllers
-│   ├── hardware/       # Hardware abstraction classes
-│   ├── utilities/      # Helper functions and tools
-│   └── vision/         # Computer vision systems
-│
-├── libs/               # External dependencies
-└── README.md
+│   ├── config/       # Hardware configuration
+│   ├── vision/      # Computer Vision Systems
+│   └── pedroPathing/         # Pedro tuning, constants, and procedures
 ```
 
 ---
@@ -83,107 +80,29 @@ The FTC SDK provides the foundation for building Android applications that contr
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/FTC-Lancers/3415-Robot-Code.git
+git clone https://github.com/LancerRobotics/biobuzz.git
 ```
 
 2. Open the project in Android Studio.
 
 3. Allow Gradle to sync.
 
-4. Connect your Control Hub or upload the generated APK.
-
-5. Deploy and test your OpModes.
-
----
-
-## 🧪 Development Workflow
-
-Before pushing code:
-
-1. Test changes on the robot.
-2. Verify autonomous paths.
-3. Check telemetry output.
-4. Confirm hardware mappings.
-5. Create a descriptive commit message.
-
-Example:
-
-```
-Added improved PID tuning for drivetrain
-```
-
 ---
 
 ## 🏎️ Autonomous
 
-Our autonomous programs focus on:
-
-* Accurate localization
-* Efficient path planning
-* Reliable scoring cycles
-* Consistent execution
-
 Autonomous code can be found in:
 
 ```
-TeamCode/src/main/java/org/firstinspires/ftc/teamcode/opmodes/autonomous
+TeamCode/src/main/java/org/firstinspires/ftc/teamcode/opmodes/auton
 ```
 
 ---
 
 ## 🎮 TeleOp
 
-Driver-controlled programs prioritize:
-
-* Intuitive controls
-* Fast cycle times
-* Driver feedback
-* Reliability during matches
-
 TeleOp code can be found in:
 
 ```
 TeamCode/src/main/java/org/firstinspires/ftc/teamcode/opmodes/teleop
 ```
-
----
-
-## 👥 Contributors
-
-Developed by the students of:
-
-**FTC Team #3415 — Lancers**
-
-Contributors:
-
-* Robotics Software Team
-* Mechanical Team
-* Electrical Team
-* CAD & Design Team
-* Outreach Team
-
----
-
-## 📚 Resources
-
-* FIRST Tech Challenge Documentation
-  https://ftc-docs.firstinspires.org/
-
-* FTC SDK Documentation
-  https://javadoc.io/doc/org.firstinspires.ftc
-
-* FTC Community
-  https://ftc-community.firstinspires.org/
-
----
-
-## 📜 License
-
-This repository contains team-developed code for FTC competition use.
-
-Parts of this project are based on the official FIRST Tech Challenge SDK.
-
----
-
-**Built with engineering, teamwork, and innovation.**
-**FTC Lancers #3415**
