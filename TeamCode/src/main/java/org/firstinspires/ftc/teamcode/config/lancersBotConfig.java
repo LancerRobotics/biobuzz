@@ -14,14 +14,11 @@ lancersBotConfig {
     public final static String OUTTAKE_MOTOR_TWO = "outtakeMotorTwo"; // EH motor port 2
     public final static String IMU = "imu_ex"; // Expansion Hub IMU
 
-   /* public final static String OUTTAKE_ROTATION_MOTOR = "outtakeRotationMotor";
+   public final static String OUTTAKE_ROTATION_MOTOR = "outtakeRotationMotor";
 
     public final static String OUTTAKE_SERVO = "outtakeServo"; // EH servo port 0
 
     public final static String LIMELIGHT = "limelight";
 
     public final static String PINPOINT = "Buzzy x Meahul 6767";
-
-    Legacy from last year
-    */
 }
