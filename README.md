@@ -19,59 +19,18 @@ We are a student-led robotics team focused on engineering, software development,
 
 ---
 
-## 🛠️ Technology Stack
-
-### Programming
-
-* Java
-* FTC SDK
-* Android Studio
-* Gradle
-
-### Robot Software
-
-* Custom autonomous routines
-* Driver-controlled TeleOp programs
-* Motion control systems
-* Sensor integration
-* Computer vision pipelines
-* Robot configuration management
-
-### Hardware
-
-* REV Control Hub ecosystem
-* REV Expansion Hub ecosystem
-* GoBILDA mechanical systems
-* Motors, servos, and sensors used for competition
-
----
-
 ## 📂 Repository Structure
 
 ```
 TeamCode/
 │
 ├── src/main/java/org/firstinspires/ftc/teamcode/
-│   ├── opmodes/        # Autonomous and TeleOp programs
+│   ├── opmodes/        # Autonomous and teleop programs
 │   ├── subsystems/     # Robot mechanism controllers
-│   ├── config/       # Hardware configuration
-│   ├── vision/      # Computer Vision Systems
-│   └── pedroPathing/         # Pedro tuning, constants, and procedures
+│   ├── config/         # Hardware configuration
+│   ├── vision/         # Computer vision systems
+│   └── pedroPathing/   # Pedro tuning, constants, and procedures
 ```
-
----
-
-## 🚀 Getting Started
-
-### Requirements
-
-To develop for this repository, install:
-
-* Android Studio (latest supported version)
-* Java Development Kit (JDK)
-* FTC SDK-compatible environment
-
-The FTC SDK provides the foundation for building Android applications that control an FTC competition robot.
 
 ---
 
@@ -87,22 +46,3 @@ git clone https://github.com/LancerRobotics/biobuzz.git
 
 3. Allow Gradle to sync.
 
----
-
-## 🏎️ Autonomous
-
-Autonomous code can be found in:
-
-```
-TeamCode/src/main/java/org/firstinspires/ftc/teamcode/opmodes/auton
-```
-
----
-
-## 🎮 TeleOp
-
-TeleOp code can be found in:
-
-```
-TeamCode/src/main/java/org/firstinspires/ftc/teamcode/opmodes/teleop
-```
