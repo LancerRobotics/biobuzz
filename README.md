@@ -1,6 +1,6 @@
 # FTC Lancers #3415 — BIOBUZZ Robot Code
 
-![FTC Lancers Logo](./assets/lancers-logo.png)
+Currently AI Generated. Will fix eventually
 
 Welcome to the official robot code repository for **FIRST Tech Challenge Team #3415 — Lancers**.
 
