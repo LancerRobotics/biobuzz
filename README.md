@@ -1,48 +1,40 @@
-# FTC Lancers #3415 — BIOBUZZ Robot Code
 
-Currently AI Generated. Will fix eventually
 
-Welcome to the official robot code repository for **FIRST Tech Challenge Team #3415 — Lancers**.
+# FTC Lancers #3415 : BIOBUZZꙮ
 
-This repository contains the software used to control our competition robot for the **2026–2027 FTC BIOBUZZ season**. Our code is built on top of the official FTC Android SDK and is written primarily in **Java** using Android Studio.
 
----
 
-## 🤖 About Team 3415
 
-**Team:** Lancers
-**Team Number:** 3415
-**Program:** FIRST Tech Challenge (FTC)
-**Season:** BIOBUZZ 2026–2027
+Welcome to the best FTC team in the world!<br><br>This is the official robot code repository for **FTC team #3415, the Lancers!**.
 
-We are a student-led robotics team focused on engineering, software development, and innovation. Our goal is to build a reliable, efficient, and competitive robot through strong design, testing, and collaboration.
+This repository is our official code for the **2026-2027 FTC season: BioBuzz**.
+Our code is written primarily in the **Java** language operating in Android Studio and built ontop of the official FTC Andriod SDK.
+
 
 ---
 
-## 📂 Repository Structure
+## About Our Team: 
+
+**Team:** Lancers <br>**Team Number:** 3415 <br>**Program:** FIRST Tech Challenge (FTC) <br>**Season:** BIOBUZZ 2026–2027
+
+We are a student-led robotics team based out of Livingston High School. Our team is focused on innovation encompassing engineering and software development. Our team goal is to build a reliable, efficient, and competitive robot through strong design and collaboration.
+
+---
+
+##  Repository Structure
 
 ```
+
 TeamCode/
 │
-├── src/main/java/org/firstinspires/ftc/teamcode/
-│   ├── opmodes/        # Autonomous and teleop programs
-│   ├── subsystems/     # Robot mechanism controllers
-│   ├── config/         # Hardware configuration
-│   ├── vision/         # Computer vision systems
-│   └── pedroPathing/   # Pedro tuning, constants, and procedures
+└── src/main/java/org/firstinspires/ftc/teamcode/
+    ├── opmodes/        # Autonomous and teleop programs
+    ├── subsystems/     # Robot mechanism controllers
+    ├── config/         # Hardware configuration
+    ├── vision/         # Computer vision systems
+    └── pedroPathing/   # Pedro tuning, constants, and procedures
+    
 ```
 
 ---
-
-## 📥 Setup Instructions
-
-1. Clone this repository:
-
-```bash
-git clone https://github.com/LancerRobotics/biobuzz.git
-```
-
-2. Open the project in Android Studio.
-
-3. Allow Gradle to sync.
 
