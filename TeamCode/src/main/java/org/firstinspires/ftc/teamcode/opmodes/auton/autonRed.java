@@ -16,9 +16,7 @@ import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.
-
-        opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous(name = "autonRed", group = "Autonomous")
 public class autonRed extends LinearOpMode {
 
