@@ -57,6 +57,30 @@ public class lancersTeleopController extends LinearOpMode {
             outtakeMotor.setPower(outtakeOn ? 1.0 : 0.0);
             outtakeMotorTwo.setPower(outtakeTwoOn ? 1.0 : 0.0);
 
+            // joystick to motor movment ig
+            DcMotor frontright = hardwareMap.get(DcMotor.class, "frontRightMotor");
+            DcMotor frontleft = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+            DcMotor backright = hardwareMap.get(DcMotor.class, "rearRightMotor");
+            DcMotor backleft = hardwareMap.get(DcMotor.class, "rearLeftMotor");
+
+            double y = -gamepad2.left_stick_y;
+            double x = gamepad2.left_stick_x;
+            double r = gamepad2.right_stick_x;
+
+            double flPower = y + x + r;
+            double frPower = y - x - r;
+            double blPower = y - x + r;
+            double brPower = y + x - r;
+
+            double max = Math.max(1.0, Math.max(Math.abs(flPower),
+                    Math.max(Math.abs(frPower),
+                            Math.max(Math.abs(blPower), Math.abs(brPower)))));
+
+            frontleft.setPower(flPower / max);
+            frontright.setPower(frPower / max);
+            backleft.setPower(blPower / max);
+            backright.setPower(brPower / max);
+
             telemetry.addData("Intake forward", intakeForwardOn);
             telemetry.addData("Intake reverse", intakeReverseOn);
             telemetry.addData("Outtake", outtakeOn);
