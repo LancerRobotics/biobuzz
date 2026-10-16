@@ -42,7 +42,7 @@ public class robot {
                 hardwareMap
         );
         outtake = new outtake(
-                //TODO:hardwareMap,
+                hardwareMap
                 //TODO:OuttakeVelocity
         );
         odo = hardwareMap.get(
@@ -148,11 +148,6 @@ public class robot {
                 //TODO:outtake.getVelocity()
         );
 
-
-        telemetry.addData(
-                "Intake Power",
-                intake.getPower()
-        );
 
 
         telemetry.addLine("----------------");

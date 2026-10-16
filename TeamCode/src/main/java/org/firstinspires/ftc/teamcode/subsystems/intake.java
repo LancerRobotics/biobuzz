@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 public class intake {
     private final DcMotor intakeMotor;
     private double intakePower = 0;
+
     public intake(HardwareMap hardwareMap) {
         intakeMotor = hardwareMap.get(
                 DcMotor.class,
@@ -15,12 +16,8 @@ public class intake {
                 DcMotorSimple.Direction.REVERSE
         );
     }
-    public void setPower(double power) {
-        intakePower = power;
-        intakeMotor.setPower(power);
-    }
-    public double getPower() {
-        return intakePower;
+    public void toggleIntake(boolean intakeOn){
+        intakeMotor.setPower(intakeOn ? 1.0 : 0.0);
     }
     public void stop() {
         intakePower = 0;

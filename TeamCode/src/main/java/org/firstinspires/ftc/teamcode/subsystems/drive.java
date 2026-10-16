@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 public class drive {
-    public static final double DEAD_ZONE_LIMIT = 0.15;
+    public static final double DEAD_ZONE_LIMIT = 0.06;
     private final DcMotorEx leftFront;
     private final DcMotorEx leftRear;
     private final DcMotorEx rightFront;
@@ -40,40 +42,32 @@ public class drive {
                 DcMotorSimple.Direction.FORWARD
         );
     }
-    public void driveMecanum(
-            double ly,
-            double lx,
-            double rx,
-            double multiplier
-    ) {
-        ly *= multiplier;
-        lx *= multiplier;
-        rx *= multiplier;
-        double denominator = Math.max(
-                Math.abs(ly) +
-                        Math.abs(lx) +
-                        Math.abs(rx),
-                1.0
-        );
-        double fl = (ly + lx + rx) / denominator;
-        double bl = (ly - lx + rx) / denominator;
-        double fr = (ly - lx - rx) / denominator;
-        double br = (ly + lx - rx) / denominator;
-        leftFront.setPower(fl);
-        leftRear.setPower(bl);
-        rightFront.setPower(fr);
-        rightRear.setPower(br);
-    }
-    public void stop() {
-        leftFront.setPower(0);
-        leftRear.setPower(0);
-        rightFront.setPower(0);
-        rightRear.setPower(0);
+    public void driveMecanum(double y,double x,double r) {
+        double flPower = y + x + r;
+        double frPower = y - x - r;
+        double blPower = y - x + r;
+        double brPower = y + x - r;
+        double max = Math.max(1.0, Math.max(
+                Math.abs(flPower),
+                Math.max(Math.abs(frPower),
+                        Math.max(Math.abs(blPower), Math.abs(brPower)))
+        ));
+        leftFront.setPower(flPower / max);
+        rightFront.setPower(frPower / max);
+        leftRear.setPower(blPower / max);
+        rightRear.setPower(brPower / max);
     }
     public static double respectDeadZones(double input) {
         if(Math.abs(input) < DEAD_ZONE_LIMIT) {
             return 0;
         }
         return input;
+    }
+
+    public void stop() {
+        leftFront.setPower(0);
+        rightFront.setPower(0);
+        leftRear.setPower(0);
+        rightRear.setPower(0);
     }
 }
