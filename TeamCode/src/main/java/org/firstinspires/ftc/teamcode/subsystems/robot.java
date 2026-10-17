@@ -30,7 +30,6 @@ public class robot {
             boolean autonMode
     ) {
         this.hardwareMap = hardwareMap;
-
         this.redMode = redMode;
         this.autonMode = autonMode;
         telemetry = telem;
@@ -57,112 +56,55 @@ public class robot {
         odo.setEncoderResolution(
                 GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD
         );
-
-
         odo.setEncoderDirections(
                 GoBildaPinpointDriver.EncoderDirection.REVERSED,
                 GoBildaPinpointDriver.EncoderDirection.REVERSED
         );
-
-
         odo.resetPosAndIMU();
-
     }
-
-
-
-
     public void update() {
-
         odo.update();
-
     }
-
-
-
-
-
     public double getRobotX() {
-
         return odo.getPosX(
                 DistanceUnit.INCH
         );
-
     }
-
-
-
-
     public double getRobotY() {
-
         return odo.getPosY(
                 DistanceUnit.INCH
         );
-
     }
-
-
-
-
     public double getHeading() {
-
         return odo.getHeading(
                 AngleUnit.DEGREES
         );
-
     }
-
-
-
-
-
     public void sendTelemetry() {
-
-
         telemetry.addLine("----------------");
-
         telemetry.addData(
                 "X",
                 "%.2f",
                 getRobotX()
         );
-
-
         telemetry.addData(
                 "Y",
                 "%.2f",
                 getRobotY()
         );
-
-
         telemetry.addData(
                 "Heading",
                 "%.2f",
                 getHeading()
         );
-
-
         telemetry.addData(
                 "Outtake Velocity",
                 "%.0f"//,
                 //TODO:outtake.getVelocity()
         );
-
-
-
         telemetry.addLine("----------------");
-
     }
-
-
-
-
-
     public HardwareMap getHardwareMap() {
-
         return hardwareMap;
-
     }
-
-
 }
