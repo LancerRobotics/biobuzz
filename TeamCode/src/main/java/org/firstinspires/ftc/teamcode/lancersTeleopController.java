@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,7 +10,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.subsystems.drive;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.outtake;
-import org.firstinspires.ftc.teamcode.subsystems.outtakeServo;
 import org.firstinspires.ftc.teamcode.subsystems.turret;
 
 /* thx vincent and fire for this idea lol
@@ -54,7 +51,7 @@ public abstract class lancersTeleopController extends LinearOpMode {
         intake intakeSubsystem = new intake(hardwareMap);
         outtake outtakeSubsystem = new outtake(hardwareMap);
         turret turretSubsystem = new turret();
-        outtakeServo outtakeServoSubsystem = new outtakeServo();
+        outtake outtakeServoSubsystem = new outtake(hardwareMap);
         GoBildaPinpointDriver odometry = hardwareMap.get(
                 GoBildaPinpointDriver.class,
                 lancersBotConfig.PINPOINT

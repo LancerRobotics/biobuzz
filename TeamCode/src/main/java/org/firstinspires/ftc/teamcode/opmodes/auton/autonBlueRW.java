@@ -74,7 +74,7 @@ public class autonBlueRW extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        turretSubsystem.init(hardwareMap, lancersBotConfig.OUTTAKE_ROTATION_MOTOR);
+        turretSubsystem.init(hardwareMap);
         intakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.INTAKE_MOTOR);
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
         outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);

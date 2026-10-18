@@ -10,14 +10,11 @@ import com.qualcomm.robotcore.hardware.IMU;
 public class drive {
     private DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
     private IMU imu;
-
     public drive() {
     }
-
     public drive(HardwareMap hardwareMap) {
         init(hardwareMap);
     }
-
     public void init(HardwareMap hardwareMap) {
         frontLeftMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.FRONT_LEFT_MOTOR);
         frontRightMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.FRONT_RIGHT_MOTOR);

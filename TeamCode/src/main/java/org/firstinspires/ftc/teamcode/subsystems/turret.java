@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
+
 public class turret {
 
     // Field geometry
@@ -28,8 +30,8 @@ public class turret {
     private double desiredTurretDegrees = 0.0;
     private double errorDegrees = 0.0;
 
-    public void init(HardwareMap hardwareMap, String motorName) {
-        turretMotor = hardwareMap.get(DcMotorEx.class, motorName);
+    public void init(HardwareMap hardwareMap) {
+        turretMotor = hardwareMap.get(DcMotorEx.class, lancersBotConfig.OUTTAKE_ROTATION_MOTOR);
 
         // Preserve last year's motor direction convention.
         turretMotor.setDirection(DcMotorSimple.Direction.FORWARD);
