@@ -19,8 +19,9 @@ public class intake {
     public void toggleIntake(boolean intakeOn){
         intakeMotor.setPower(intakeOn ? 1.0 : 0.0);
     }
+    public void reverseIntake(boolean intakeReverse){intakeMotor.setPower(intakeReverse ? -1.0 : 0.0);};
+
     public void stop() {
-        intakePower = 0;
         intakeMotor.setPower(0);
     }
 }

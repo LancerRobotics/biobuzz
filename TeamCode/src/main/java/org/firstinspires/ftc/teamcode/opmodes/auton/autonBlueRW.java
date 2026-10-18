@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.auton;
 
-import static com.pedropathing.api.Paths.*;
 import com.pedropathing.api.Paths;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,8 +16,14 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-@Autonomous(name = "autonRed", group = "Autonomous")
-public class autonRed extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.subsystems.turret;
+@Autonomous(name = "Blue Auton rear wall", group = "Autonomous")
+public class autonBlueRW extends LinearOpMode {
+    private turret turretSubsystem = new turret();
+//must verify constants
+    private static final double blueTargetX = 86.0;
+    private static final double blueTargetYAboveMidline = 83.0;
+    private static final double blueTargetYBelowMidline = 61.0;
 
     private Follower follower;
     private DcMotor intakeMotor;
@@ -26,17 +31,17 @@ public class autonRed extends LinearOpMode {
     private DcMotor outtakeMotorTwo;
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(56, 8, 90);
-    private final Pose path1 = poseFactory.of(10.2057, 9.7057, 256);
-    private final Pose path1Control1 = poseFactory.of(41.5224, 59.4542, 0);
-    private final Pose point2 = poseFactory.of(56.1033, 122.7827, 270);
-    private final Pose point2Control1 = poseFactory.of(28.7651, 102.2378, 0);
-    private final Pose point3 = poseFactory.of(49.346, 129.7495, 100);
-    private final Pose point3Control1 = poseFactory.of(66.9006, 137.3353, 0);
-    private final Pose point4 = poseFactory.of(56.1423, 122.5448, 270);
-    private final Pose point4Control1 = poseFactory.of(39.2427, 115.4113, 0);
-    private final Pose point5 = poseFactory.of(12.729, 94.269, 270);
-    private final Pose point5Control1 = poseFactory.of(52.73, 102.5819, 0);
+    private final Pose start = poseFactory.of(144-56, 144-8, 90-180);
+    private final Pose path1 = poseFactory.of(144-10.2057, 144-9.7057, 256-180);
+    private final Pose path1Control1 = poseFactory.of(144-41.5224, 144-59.4542, 0-180);
+    private final Pose point2 = poseFactory.of(144-56.1033, 144-122.7827, 270-180);
+    private final Pose point2Control1 = poseFactory.of(144-28.7651, 144-102.2378, 0-180);
+    private final Pose point3 = poseFactory.of(144-49.346, 144-129.7495, 100-180);
+    private final Pose point3Control1 = poseFactory.of(144-66.9006, 144-137.3353, 0-180);
+    private final Pose point4 = poseFactory.of(144-56.1423, 144-122.5448, 270-180);
+    private final Pose point4Control1 = poseFactory.of(144-39.2427, 144-115.4113, 0-180);
+    private final Pose point5 = poseFactory.of(144-12.729, 144-94.269, 270-180);
+    private final Pose point5Control1 = poseFactory.of(144-52.73, 144-102.5819, 0-180);
 
     // Autonomous routine
     public Command autoRoutine() {
@@ -69,19 +74,10 @@ public class autonRed extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        intakeMotor = hardwareMap.get(
-                DcMotor.class,
-                lancersBotConfig.INTAKE_MOTOR
-        );
-        outtakeMotor = hardwareMap.get(
-                DcMotor.class,
-                lancersBotConfig.OUTTAKE_MOTOR
-        );
-        outtakeMotorTwo = hardwareMap.get(
-
-                DcMotor.class,
-                lancersBotConfig.OUTTAKE_MOTOR_TWO
-        );
+        turretSubsystem.init(hardwareMap, lancersBotConfig.OUTTAKE_ROTATION_MOTOR);
+        intakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.INTAKE_MOTOR);
+        outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
+        outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
         outtakeMotorTwo.setPower(0);
@@ -93,10 +89,27 @@ public class autonRed extends LinearOpMode {
         while (opModeIsActive()) {
             follower.update();
             Scheduler.execute();
+            double robotX = follower.pose().x();
+            double robotY = follower.pose().y();
+            double robotHeadingDegrees = Math.toDegrees(follower.pose().heading());//chat said heading gets returned in radians but we doing posefollow degrees so will need to see this then adjust accordingly
+            turret.AimSolution aim =
+                    turretSubsystem.calculateAim(
+                            robotX,
+                            robotY,
+                            robotHeadingDegrees,
+                            blueTargetX,
+                            blueTargetYBelowMidline,
+                            blueTargetYAboveMidline
+                    );
+            turretSubsystem.update(aim.targetAngle);
 
             telemetry.addData("x", follower.pose().x());
             telemetry.addData("y", follower.pose().y());
-            telemetry.addData("heading", follower.pose().heading());
+            telemetry.addData("heading", robotHeadingDegrees);
+            telemetry.addData("Turret target angle", aim.targetAngle);
+            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
+            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
+            telemetry.addData("Distance to target", aim.targetDistance);
 
             if (follower.currentPath() != null) {
                 telemetry.addData("Current path distance remaining", follower.distanceToEndpoint());
@@ -105,6 +118,10 @@ public class autonRed extends LinearOpMode {
 
             telemetry.update();
         }
+        turretSubsystem.stop();
+        intakeMotor.setPower(0);
+        outtakeMotor.setPower(0);
+        outtakeMotorTwo.setPower(0);
     }
 
     public Path path1() {

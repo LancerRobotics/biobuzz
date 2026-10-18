@@ -14,6 +14,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 public class Constants {
+    //placeholder stuff. Must update when build finishes and we can tune
+    //atleast tuning should be more accurate and faster this yr bc of autotune...
     public static MecanumConfig drivetrainConfig =
             new MecanumConfig(c -> {
                 c.frontLeftName.set(

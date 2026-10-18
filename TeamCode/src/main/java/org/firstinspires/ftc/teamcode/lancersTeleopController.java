@@ -12,16 +12,26 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.subsystems.drive;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.outtake;
+import org.firstinspires.ftc.teamcode.subsystems.outtakeServo;
 import org.firstinspires.ftc.teamcode.subsystems.turret;
 
+/* thx vincent and fire for this idea lol
+Gamepad 1 controls:
+Left stick drive, right stick rotate
+
+Gamepad 2 controls:
+Left bumper(toggle) intake, right bumper(toggle) outtake, x(hold) reverse intake
+ */
 public abstract class lancersTeleopController extends LinearOpMode {
     private boolean intakeForwardOn;
     private boolean intakeReverseOn;
     private boolean outtakeOn;
     private boolean outtakeTwoOn;
+    private boolean outtakeServoOn;
 
     private boolean previousIntake = false;
     private boolean previousOuttakeTwo = false;
+    private boolean previousOuttakeServo = false;
     private boolean previousLeftTrigger;
     private boolean previousRightTrigger;
 
@@ -44,6 +54,7 @@ public abstract class lancersTeleopController extends LinearOpMode {
         intake intakeSubsystem = new intake(hardwareMap);
         outtake outtakeSubsystem = new outtake(hardwareMap);
         turret turretSubsystem = new turret();
+        outtakeServo outtakeServoSubsystem = new outtakeServo();
         GoBildaPinpointDriver odometry = hardwareMap.get(
                 GoBildaPinpointDriver.class,
                 lancersBotConfig.PINPOINT
@@ -79,6 +90,7 @@ public abstract class lancersTeleopController extends LinearOpMode {
         outtakeMotorTwo.setPower(0);
         intakeSubsystem.stop();
         driveSubsystem.stop();
+        outtakeServoSubsystem.setServoPos(0);//temp must change when logan + build done
 
         telemetry.addLine("Ready");
         telemetry.update();
@@ -93,15 +105,26 @@ public abstract class lancersTeleopController extends LinearOpMode {
                     gamepad1.right_stick_x
             );
 
-            if (gamepad1.left_bumper && !previousIntake) {
+            if (gamepad2.left_bumper && !previousIntake) {
                 intakeForwardOn = !intakeForwardOn;
                 intakeSubsystem.toggleIntake(intakeForwardOn);
             }
             previousIntake = gamepad1.left_bumper;
-            if (gamepad1.right_bumper && !previousOuttakeTwo) {
+            if (gamepad2.x) {
+                intakeSubsystem.reverseIntake(true);
+            }
+            if (gamepad2.right_bumper && !previousOuttakeTwo) {
                 outtakeTwoOn = !outtakeTwoOn;
                 outtakeSubsystem.toggleOuttake(outtakeTwoOn);
             }
+            previousOuttakeTwo = gamepad1.right_bumper;
+            if (gamepad2.a && !previousOuttakeServo) {
+                outtakeServoOn = !outtakeServoOn;
+                outtakeServoSubsystem.setServoPos(5);//temp must change when logan + build done
+            }
+            previousOuttakeTwo = gamepad1.right_bumper;
+
+
 
             double robotX = odometry.getPosX(DistanceUnit.INCH);
             double robotY = odometry.getPosY(DistanceUnit.INCH);
