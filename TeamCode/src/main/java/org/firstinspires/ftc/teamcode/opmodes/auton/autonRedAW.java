@@ -153,7 +153,7 @@ public class autonRedAW extends LinearOpMode {
 
     private Command outtakeOn() {
         return instant(() -> {
-            outtakeMotorTwo.setPower(1.0);
+            outtakeMotorTwo.setPower(0.9);
         });
     }
 
