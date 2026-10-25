@@ -171,6 +171,14 @@ public class lancersTeleopController {
                         aimTargetYBelowMidline,
                         aimTargetYAboveMidline
                 );
+        turretSubsystem.update(aim.targetAngle);
+
+        outtakeSubsystem.shoot(aim.targetDistance);
+        if (gamepad2.right_trigger > 0.5) {
+            outtakeSubsystem.shoot(aim.targetDistance);
+        } else {
+            outtakeSubsystem.stopShooter();
+        }
 
         //Telemetry
         telemetry.addData("Intake forward", intakeForwardOn);
