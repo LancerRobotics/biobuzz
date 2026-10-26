@@ -19,11 +19,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.subsystems.robot;
 import org.firstinspires.ftc.teamcode.subsystems.turret;
 
-@Autonomous(name = "Red auton audience wall short", group = "Autonomous")
+@Autonomous(name = "eRed auton audience wall short", group = "Autonomous")
 public class autonBlueRWSHORT extends LinearOpMode {
-    private turret turretSubsystem = new turret();
+    //private turret turretSubsystem = new turret();
     //must verify constants
     private static final double blueTargetX = 86.0;
     private static final double blueTargetYBelowMidline = 61.0;
@@ -53,7 +54,7 @@ public class autonBlueRWSHORT extends LinearOpMode {
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        turretSubsystem.init(hardwareMap);
+        //turretSubsystem.init(hardwareMap);
         intakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.INTAKE_MOTOR);
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
         outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
@@ -71,7 +72,7 @@ public class autonBlueRWSHORT extends LinearOpMode {
             double robotX = follower.pose().x();
             double robotY = follower.pose().y();
             double robotHeadingDegrees = Math.toDegrees(follower.pose().heading());//chat said heading gets returned in radians but we doing posefollow degrees so will need to see this then adjust accordingly
-            turret.AimSolution aim =
+            /*turret.AimSolution aim =
                     turretSubsystem.calculateAim(
                             robotX,
                             robotY,
@@ -80,15 +81,15 @@ public class autonBlueRWSHORT extends LinearOpMode {
                             blueTargetYBelowMidline,
                             blueTargetYAboveMidline
                     );
-            turretSubsystem.update(aim.targetAngle);
+            turretSubsystem.update(aim.targetAngle);*/
 
             telemetry.addData("x", follower.pose().x());
             telemetry.addData("y", follower.pose().y());
             telemetry.addData("heading", robotHeadingDegrees);
-            telemetry.addData("Turret target angle", aim.targetAngle);
-            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
-            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
-            telemetry.addData("Distance to target", aim.targetDistance);
+            //telemetry.addData("Turret target angle", aim.targetAngle);
+            //telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
+            //telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
+            //telemetry.addData("Distance to target", aim.targetDistance);
 
             if (follower.currentPath() != null) {
                 telemetry.addData("Current path distance remaining", follower.distanceToEndpoint());
@@ -97,10 +98,14 @@ public class autonBlueRWSHORT extends LinearOpMode {
 
             telemetry.update();
         }
-        turretSubsystem.stop();
+        //turretSubsystem.stop();
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
         outtakeMotorTwo.setPower(0);
+        robot.odoX = follower.pose().x();
+        robot.odoY = follower.pose().y();
+        robot.odoH = Math.toDegrees(follower.pose().heading());
+        robot.poseSaved = true;
     }
 
     public Path path1() {

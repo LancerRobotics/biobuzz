@@ -70,6 +70,7 @@ public class autonBlueP extends LinearOpMode {
                 telemetry.addData("Path number", follower.pathIndex());
             }
 
+
             telemetry.update();
         }
 

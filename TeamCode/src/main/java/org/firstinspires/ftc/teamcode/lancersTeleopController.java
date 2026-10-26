@@ -30,7 +30,7 @@ public class lancersTeleopController {
     // Hardware
     private GoBildaPinpointDriver odometry;
     private DcMotor outtakeMotor;
-    private DcMotor outtakeMotorTwo;
+    //private DcMotor outtakeMotorTwo;
 
     private Telemetry telemetry;
 
@@ -86,9 +86,9 @@ public class lancersTeleopController {
 
         // Initialize motors
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
-        outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
+        //outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
         outtakeMotor.setPower(0);
-        outtakeMotorTwo.setPower(0);
+        //outtakeMotorTwo.setPower(0);
 
         // Initialize odometry
         odometry = hardwareMap.get(GoBildaPinpointDriver.class, lancersBotConfig.PINPOINT);
@@ -110,7 +110,7 @@ public class lancersTeleopController {
 
         driveSubsystem.stop();
         intakeSubsystem.stop();
-        outtakeSubsystem.setServoPos(0);
+        //outtakeSubsystem.setServoPos(0);
         initialized = true;
         telemetry.addLine("Lancers TeleOp initialized");
         telemetry.update();
@@ -133,33 +133,39 @@ public class lancersTeleopController {
                 gamepad1.right_stick_x
         );
 
-        //Toggle intake - gamepad 2 left bumper
+
+        // Toggle intake - gamepad 2 left bumper
         if (gamepad2.left_bumper && !previousIntake) {
             intakeForwardOn = !intakeForwardOn;
-            intakeSubsystem.toggleIntake(intakeForwardOn);
         }
         previousIntake = gamepad2.left_bumper;
 
-        //Reverse intake when pressed - gamepad 2 x
-        intakeReverseOn = gamepad2.x;
-        intakeSubsystem.reverseIntake(intakeReverseOn);
+        // hold x to reverse intake
+        if (gamepad2.x) {
+            intakeSubsystem.setIntakePower(-1.0);
+        } else if (intakeForwardOn) {
+            intakeSubsystem.setIntakePower(1.0);
+        } else {
+            intakeSubsystem.setIntakePower(0.0);
+        }
+
 
         //Toggle feeder wheel - gamepad 2 right bumper
-        if (gamepad2.right_bumper && !previousOuttakeTwo) {
-            outtakeTwoOn = !outtakeTwoOn;
-            outtakeSubsystem.toggleOuttake(outtakeTwoOn);
-        }
-        previousOuttakeTwo = gamepad2.right_bumper;
+        //if (gamepad2.right_bumper && !previousOuttakeTwo) {
+            //outtakeTwoOn = !outtakeTwoOn;
+            //outtakeSubsystem.toggleOuttake(outtakeTwoOn);
+        //}
+        //previousOuttakeTwo = gamepad2.right_bumper;
 
         //Toggle servo - gamepad 2 a
-        if (gamepad2.a && !previousOuttakeServo) {
+        /*if (gamepad2.a && !previousOuttakeServo) {
             outtakeServoOn = !outtakeServoOn;
 
             outtakeSubsystem.setServoPos(
                     outtakeServoOn ? 5 : 0
             );
         }
-        previousOuttakeServo = gamepad2.a;
+        previousOuttakeServo = gamepad2.a;*/
 
         //Turret
         turret.AimSolution aim =
@@ -176,15 +182,13 @@ public class lancersTeleopController {
         outtakeSubsystem.shoot(aim.targetDistance);
         if (gamepad2.right_trigger > 0.5) {
             outtakeSubsystem.shoot(aim.targetDistance);
-        } else {
-            outtakeSubsystem.stopShooter();
         }
 
         //Telemetry
         telemetry.addData("Intake forward", intakeForwardOn);
         telemetry.addData("Intake reverse", intakeReverseOn);
-        telemetry.addData("Outtake/feeder", outtakeTwoOn);
-        telemetry.addData("Servo position", outtakeServoOn);
+        //telemetry.addData("Outtake/feeder", outtakeTwoOn);
+        //telemetry.addData("Servo position", outtakeServoOn);
         telemetry.addData("Odometry X (in)", robotX);
         telemetry.addData("Odometry Y (in)", robotY);
         telemetry.addData("Heading (deg)", robotHeading);
@@ -202,7 +206,7 @@ public class lancersTeleopController {
         driveSubsystem.stop();
         intakeSubsystem.stop();
         outtakeMotor.setPower(0);
-        outtakeMotorTwo.setPower(0);
+        //outtakeMotorTwo.setPower(0);
         initialized = false;
     }
 }

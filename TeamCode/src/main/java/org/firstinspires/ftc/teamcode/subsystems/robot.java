@@ -1,20 +1,20 @@
 package org.firstinspires.ftc.teamcode.subsystems;
-
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.subsystems.drive;
 import org.firstinspires.ftc.teamcode.subsystems.intake;
 import org.firstinspires.ftc.teamcode.subsystems.outtake;
 
-
 public class robot {
     public final drive drive;
+    public static double odoX = 0.0;
+    public static double odoY = 0.0;
+    public static double odoH = 0.0;
+    public static boolean poseSaved = false;
     public final intake intake;
     public final outtake outtake;
     public final GoBildaPinpointDriver odo;
@@ -34,32 +34,13 @@ public class robot {
         this.autonMode = autonMode;
         telemetry = telem;
         telemetry.setMsTransmissionInterval(50);
-        drive = new drive(
-                hardwareMap
-        );
-        intake = new intake(
-                hardwareMap
-        );
-        outtake = new outtake(
-                hardwareMap
-                //TODO:OuttakeVelocity
-        );
-        odo = hardwareMap.get(
-                GoBildaPinpointDriver.class,
-                lancersBotConfig.PINPOINT
-        );
-        odo.setOffsets(
-                5.5,
-                -5,
-                DistanceUnit.INCH
-        );
-        odo.setEncoderResolution(
-                GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD
-        );
-        odo.setEncoderDirections(
-                GoBildaPinpointDriver.EncoderDirection.REVERSED,
-                GoBildaPinpointDriver.EncoderDirection.REVERSED
-        );
+        drive = new drive(hardwareMap);
+        intake = new intake(hardwareMap);
+        outtake = new outtake(hardwareMap);
+        odo = hardwareMap.get(GoBildaPinpointDriver.class, lancersBotConfig.PINPOINT);
+        odo.setOffsets(5.5, -5, DistanceUnit.INCH);//adjust
+        odo.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        odo.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.REVERSED);
         odo.resetPosAndIMU();
     }
     public void update() {
