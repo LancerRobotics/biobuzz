@@ -13,7 +13,7 @@ public class robot {
     public final drive drive;
     public static double odoX = 0.0;
     public static double odoY = 0.0;
-    public static double odoH = 0.0;
+    public static double odoH = 90.0;
     public static boolean poseSaved = false;
     public final intake intake;
     public final outtake outtake;
@@ -38,7 +38,7 @@ public class robot {
         intake = new intake(hardwareMap);
         outtake = new outtake(hardwareMap);
         odo = hardwareMap.get(GoBildaPinpointDriver.class, lancersBotConfig.PINPOINT);
-        odo.setOffsets(5.5, -5, DistanceUnit.INCH);//adjust
+        odo.setOffsets(0, 0, DistanceUnit.INCH);//adjust
         odo.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
         odo.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.REVERSED);
         odo.resetPosAndIMU();
