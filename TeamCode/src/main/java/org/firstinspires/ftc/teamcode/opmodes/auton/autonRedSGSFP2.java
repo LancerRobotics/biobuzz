@@ -22,8 +22,8 @@ import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.turret;
 
-@Autonomous(name = "Red Auton Shoot-Garden-Shoot-Flower-Shoot-Parking", group = "Autonomous")
-public class autonRedSGSFP extends LinearOpMode{
+@Autonomous(name = "Red Auton p-2 Shoot-Garden-Shoot-Flower-Shoot-Parking", group = "Autonomous")
+public class autonRedSGSFP2 extends LinearOpMode{
     private turret turretSubsystem = new turret();
 
     private static final double redTargetX = 58.0;
