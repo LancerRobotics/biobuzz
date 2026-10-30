@@ -32,16 +32,16 @@ public class drive {
         RevHubOrientationOnRobot orientation = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
         imu.initialize(new IMU.Parameters(orientation));
     }
-    public void driveFieldRel(double forward, double strafe, double rotate){
+    /*public void driveFieldRel(double forward, double strafe, double rotate){
         double theta = Math.atan2(forward,strafe);
         double r = Math.hypot(strafe,forward);
         theta = AngleUnit.normalizeRadians(theta-imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
         double newForward = r * Math.sin(theta);
         double newStrafe = r * Math.cos(theta);
         driveMecanum(newForward, newStrafe, rotate);
-    }
+    }*/
 
-    private void driveMecanum(double forward, double strafe, double rotate) {
+    public void driveMecanum(double forward, double strafe, double rotate) {
         double frontLeftPower = forward + strafe + rotate;
         double frontRightPower = forward - strafe - rotate;
         double backLeftPower = forward - strafe + rotate;
