@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.subsystems.turret;
 
 @Autonomous(name = "Red Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
 public class autonRedSFP2 extends LinearOpMode{
-    private turret turretSubsystem = new turret();
+//    private turret turretSubsystem = new turret();
 
     private static final double redTargetX = 58.0;
     private static final double redTargetYBelowMidline = 56.0;
@@ -38,23 +38,22 @@ public class autonRedSFP2 extends LinearOpMode{
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(9, 70, 0);
-    private final Pose path1 = poseFactory.of(57.939, 118, 90);
-    private final Pose path1Control1 = poseFactory.of(36.2259, 120.3358, 0);
-    private final Pose point2Start = poseFactory.of(57.939, 118, 90);
-    private final Pose point2 = poseFactory.of(53.0335, 128.9407, 135);
-    private final Pose point3Start = poseFactory.of(53.0335, 128.9407, 135);
-    private final Pose point3 = poseFactory.of(9, 118, 0);
-    private final Pose point3Control1 = poseFactory.of(49.3935, 117.9003, 0);
+    private final Pose point1 = poseFactory.of(57.939, 119, 90);
+    private final Pose point1Control1 = poseFactory.of(26, 119, 0);
+    private final Pose point2Start = poseFactory.of(57.939, 119, 90);
+    private final Pose point2 = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point2Control1 = poseFactory.of(58, 125, 0);
+    private final Pose point3Start = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point3 = poseFactory.of(9, 118, 90);
+    private final Pose point3Control1 = poseFactory.of(48.6314, 118, 0);
 
     //paths
     public Path path1() {
-        return curve(start, path1Control1, path1).linear(start, path1);
+        return curve(start, point1Control1, point1).linear(start, point1);
     }
-
     public Path path2() {
-        return line(point2Start, point2).linear(point2Start, point2);
+        return curve(point2Start, point2Control1, point2).linear(point2Start, point2);
     }
-
     public Path path3() {
         return curve(point3Start, point3Control1, point3).linear(point3Start, point3);
     }
@@ -77,7 +76,7 @@ public class autonRedSFP2 extends LinearOpMode{
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        turretSubsystem.init(hardwareMap);
+//        turretSubsystem.init(hardwareMap);
 
         intakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.INTAKE_MOTOR);
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
@@ -101,24 +100,24 @@ public class autonRedSFP2 extends LinearOpMode{
             double robotHeadingDegrees = Math.toDegrees(follower.pose().heading());
 
             // turret aiming
-            turret.AimSolution aim =
-                    turretSubsystem.calculateAim(
-                            follower.pose().x(), // replace if wanted
-                            follower.pose().y(), // replace if wanted
-                            robotHeadingDegrees,
-                            redTargetX,
-                            redTargetYBelowMidline,
-                            redTargetYAboveMidline
-                    );
-            turretSubsystem.update(aim.targetAngle);
+//            turret.AimSolution aim =
+//                    turretSubsystem.calculateAim(
+//                            follower.pose().x(), // replace if wanted
+//                            follower.pose().y(), // replace if wanted
+//                            robotHeadingDegrees,
+//                            redTargetX,
+//                            redTargetYBelowMidline,
+//                            redTargetYAboveMidline
+//                    );
+//            turretSubsystem.update(aim.targetAngle);
 
             telemetry.addData("x", follower.pose().x()); // replace if wanted
             telemetry.addData("y", follower.pose().y()); // replace if wanted
             telemetry.addData("heading", robotHeadingDegrees);
-            telemetry.addData("Turret target angle", aim.targetAngle);
-            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
-            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
-            telemetry.addData("Distance to target", aim.targetDistance);
+//            telemetry.addData("Turret target angle", aim.targetAngle);
+//            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
+//            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
+//            telemetry.addData("Distance to target", aim.targetDistance);
 
 
             if(follower.currentPath() != null){
@@ -128,7 +127,7 @@ public class autonRedSFP2 extends LinearOpMode{
 
             telemetry.update();
         }
-        turretSubsystem.stop();
+//        turretSubsystem.stop();
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
         outtakeMotorTwo.setPower(0);

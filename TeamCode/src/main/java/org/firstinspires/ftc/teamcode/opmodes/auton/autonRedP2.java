@@ -26,13 +26,12 @@ public class autonRedP2 extends LinearOpMode {
 
     private Follower follower;
 
-    private final Pose start = poseFactory.of(9, 70, 90);
-    private final Pose point1Start = poseFactory.of(9, 70, 0);
+    private final Pose start = poseFactory.of(9, 70, 0);
     private final Pose point1 = poseFactory.of(9, 118, 0);
 
     //paths
     public Path path1() {
-        return Paths.line(point1Start, point1).linear(point1Start, point1);
+        return Paths.line(start, point1).linear(start, point1);
     }
 
     //sequence

@@ -26,8 +26,8 @@ public class autonBlueP extends LinearOpMode {
 
     private Follower follower;
 
-    private final Pose start = poseFactory.of(59, 11, 90);
-    private final Pose point1 = poseFactory.of(13.0765, 106.2534, 90);
+    private final Pose start = poseFactory.of(59, 11, 270);
+    private final Pose point1 = poseFactory.of(13.0765, 106.2534, 270);
     private final Pose point1Control1 = poseFactory.of(25.1546, 11.768, 0);
     private final Pose point1Control2 = poseFactory.of(14.195, 30.5945, 0);
 
