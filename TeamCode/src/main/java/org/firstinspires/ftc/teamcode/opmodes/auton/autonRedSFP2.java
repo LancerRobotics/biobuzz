@@ -37,23 +37,26 @@ public class autonRedSFP2 extends LinearOpMode{
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(9, 70, 90);
-    private final Pose point1Start = poseFactory.of(9, 70, 0);
-    private final Pose point1 = poseFactory.of(57.939, 118, 90);
-    private final Pose point1Control1 = poseFactory.of(36.2259, 120.3358, 0);
+    private final Pose start = poseFactory.of(9, 70, 0);
+    private final Pose path1 = poseFactory.of(57.939, 118, 90);
+    private final Pose path1Control1 = poseFactory.of(36.2259, 120.3358, 0);
+    private final Pose point2Start = poseFactory.of(57.939, 118, 90);
     private final Pose point2 = poseFactory.of(53.0335, 128.9407, 135);
-    private final Pose point3 = poseFactory.of(9, 118, 180);
+    private final Pose point3Start = poseFactory.of(53.0335, 128.9407, 135);
+    private final Pose point3 = poseFactory.of(9, 118, 0);
     private final Pose point3Control1 = poseFactory.of(49.3935, 117.9003, 0);
 
     //paths
     public Path path1() {
-        return curve(point1Start, point1Control1, point1).linear(point1Start, point1);
+        return curve(start, path1Control1, path1).linear(start, path1);
     }
+
     public Path path2() {
-        return line(point1, point2).linear(point1, point2);
+        return line(point2Start, point2).linear(point2Start, point2);
     }
+
     public Path path3() {
-        return curve(point2, point3Control1, point3).linear(point2, point3);
+        return curve(point3Start, point3Control1, point3).linear(point3Start, point3);
     }
 
     public Command autoRoutine(){

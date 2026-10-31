@@ -37,10 +37,10 @@ public class autonRedSP2 extends LinearOpMode {
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(9, 70, 90);
-    private final Pose point1Start = poseFactory.of(9, 70, 0);
-    private final Pose point1 = poseFactory.of(57.939, 118, 0);
+    private final Pose point1Start = poseFactory.of(9, 70, 90);
+    private final Pose point1 = poseFactory.of(57.939, 118, 90);
     private final Pose point1Control1 = poseFactory.of(36.2259, 120.3358, 0);
-    private final Pose point2 = poseFactory.of(10, 118, 0);
+    private final Pose point2 = poseFactory.of(10, 118, 90);
 
     //paths
     public Path path1() {
