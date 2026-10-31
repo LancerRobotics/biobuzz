@@ -127,9 +127,9 @@ public class lancersTeleopController {
         double robotHeading = odometry.getHeading(AngleUnit.DEGREES);
 
         //Only job for gamepad 1: driving
-        driveSubsystem.driveFieldRel(
-                -gamepad1.left_stick_y,
-                gamepad1.left_stick_x,
+        driveSubsystem.driveMecanum(
+                -gamepad1.left_stick_x,
+                gamepad1.left_stick_y,
                 gamepad1.right_stick_x
         );
 
