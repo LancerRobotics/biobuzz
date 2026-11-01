@@ -14,7 +14,7 @@ public class intake {
         intakeMotor.setPower(0);
     }
     public void setIntakePower(double power) {
-        intakeMotor.setPower(Math.max(-1.0, Math.min(1.0, power)));
+        intakeMotor.setPower(Math.max(-0.8, Math.min(0.8, power)));
     }
     public void stop() {
         intakeMotor.setPower(0);

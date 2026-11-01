@@ -47,12 +47,12 @@ public class lancersTeleopController {
     private boolean intakeForwardOn = false;
     private boolean intakeReverseOn = false;
     private boolean outtakeTwoOn = false;
-    private boolean outtakeServoOn = false;
+    //private boolean outtakeServoOn = false;
 
     // Button edge detection
     private boolean previousIntake = false;
     private boolean previousOuttakeTwo = false;
-    private boolean previousOuttakeServo = false;
+    //private boolean previousOuttakeServo = false;
 
     private boolean initialized = false;
 
@@ -92,7 +92,7 @@ public class lancersTeleopController {
 
         // Initialize odometry
         odometry = hardwareMap.get(GoBildaPinpointDriver.class, lancersBotConfig.PINPOINT);
-        odometry.setOffsets(5.5, -5.0, DistanceUnit.INCH);
+        odometry.setOffsets(0, 0, DistanceUnit.INCH);
         odometry.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
         odometry.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.REVERSED);
         odometry.resetPosAndIMU();
@@ -142,20 +142,20 @@ public class lancersTeleopController {
 
         // hold x to reverse intake
         if (gamepad2.x) {
-            intakeSubsystem.setIntakePower(-1.0);
+            intakeSubsystem.setIntakePower(-0.8);
         } else if (intakeForwardOn) {
-            intakeSubsystem.setIntakePower(1.0);
+            intakeSubsystem.setIntakePower(0.8);
         } else {
-            intakeSubsystem.setIntakePower(0.0);
+            intakeSubsystem.setIntakePower(0.8);
         }
 
 
         //Toggle feeder wheel - gamepad 2 right bumper
-        //if (gamepad2.right_bumper && !previousOuttakeTwo) {
-            //outtakeTwoOn = !outtakeTwoOn;
-            //outtakeSubsystem.toggleOuttake(outtakeTwoOn);
-        //}
-        //previousOuttakeTwo = gamepad2.right_bumper;
+        if (gamepad2.right_bumper && !previousOuttakeTwo) {
+            outtakeTwoOn = !outtakeTwoOn;
+            outtakeSubsystem.toggleOuttake(outtakeTwoOn);
+        }
+        previousOuttakeTwo = gamepad2.right_bumper;
 
         //Toggle servo - gamepad 2 a
         /*if (gamepad2.a && !previousOuttakeServo) {
@@ -168,7 +168,7 @@ public class lancersTeleopController {
         previousOuttakeServo = gamepad2.a;*/
 
         //Turret
-        turret.AimSolution aim =
+        /*turret.AimSolution aim =
                 turretSubsystem.calculateAim(
                         robotX,
                         robotY,
@@ -182,7 +182,7 @@ public class lancersTeleopController {
         outtakeSubsystem.shoot(aim.targetDistance);
         if (gamepad2.right_trigger > 0.5) {
             outtakeSubsystem.shoot(aim.targetDistance);
-        }
+        }*/
 
         //Telemetry
         telemetry.addData("Intake forward", intakeForwardOn);
@@ -192,10 +192,10 @@ public class lancersTeleopController {
         telemetry.addData("Odometry X (in)", robotX);
         telemetry.addData("Odometry Y (in)", robotY);
         telemetry.addData("Heading (deg)", robotHeading);
-        telemetry.addData("Aim target X (in)", aim.targetX);
-        telemetry.addData("Aim target Y (in)", aim.targetY);
-        telemetry.addData("Aim distance (in)", aim.targetDistance);
-        telemetry.addData("Turret target angle (deg)", aim.targetAngle);
+        //telemetry.addData("Aim target X (in)", aim.targetX);
+        //telemetry.addData("Aim target Y (in)", aim.targetY);
+        //telemetry.addData("Aim distance (in)", aim.targetDistance);
+        //telemetry.addData("Turret target angle (deg)", aim.targetAngle);
         telemetry.update();
     }
 

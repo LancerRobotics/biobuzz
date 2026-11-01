@@ -35,7 +35,7 @@ public class autonBlueSFP2 extends LinearOpMode{
     private DcMotor outtakeMotor;
     private DcMotor outtakeMotorTwo;
 
-    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75).mirrorY(70.75);
+    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
 
     private final Pose start = poseFactory.of(9, 70, 0);
     private final Pose point1 = poseFactory.of(57.939, 119, 90);

@@ -12,16 +12,16 @@ import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 public class outtake {
     private final DcMotor outtakeMotorTwo;
     private final DcMotorEx outtakeMotor;
-    private final Servo outtakeServo;
-    // Distance in inches.
+    //private final Servo outtakeServo;
+    // Distance in inches.kl;
     // Replace these dummy values with tested values.
     private final double[] distances = {24.0, 36.0, 48.0, 60.0, 72.0};
     private final double[] flywheelVelocities = {100000000, 100000000, 100000000, 100000000, 100000000};
     public outtake(HardwareMap hardwareMap) {
         outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
         outtakeMotor = hardwareMap.get(DcMotorEx.class, lancersBotConfig.OUTTAKE_MOTOR);
-        outtakeServo = hardwareMap.get(Servo.class, lancersBotConfig.OUTTAKE_SERVO);
-        outtakeMotorTwo.setDirection(DcMotorSimple.Direction.REVERSE);
+        //outtakeServo = hardwareMap.get(Servo.class, lancersBotConfig.OUTTAKE_SERVO);
+        outtakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         outtakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         outtakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         outtakeMotor.setVelocity(0);
@@ -31,11 +31,11 @@ public class outtake {
     public void toggleOuttake(boolean outtakeOn) {
         outtakeMotorTwo.setPower(outtakeOn ? 1.0 : 0.0);
     }
-    public void setServoPos(double position) {
+    /*public void setServoPos(double position) {
         outtakeServo.setPosition(
                 Math.max(0.0, Math.min(1.0, position))
         );
-    }
+    }*/
     // Find the required flywheel velocity for a given distance.
     private double getFlywheelVelocity(double distance) {
         int lastIndex = distances.length - 1;

@@ -12,42 +12,32 @@ import com.pedropathing.revhub.localizers.PinpointLocalizer;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 public class Constants {
     //placeholder stuff. Must update when build finishes and we can tune
     //atleast tuning should be more accurate and faster this yr bc of autotune...
-    public static MecanumConfig drivetrainConfig =
-            new MecanumConfig(c -> {
-                c.frontLeftName.set(
-                        lancersBotConfig.FRONT_LEFT_MOTOR);
-                c.backLeftName.set(
-                        lancersBotConfig.REAR_LEFT_MOTOR);
-                c.frontRightName.set(
-                        lancersBotConfig.FRONT_RIGHT_MOTOR);
-                c.backRightName.set(
-                        lancersBotConfig.REAR_RIGHT_MOTOR);
-                c.frontLeftDirection.set(
-                        DcMotorSimple.Direction.REVERSE);
-                c.backLeftDirection.set(
-                        DcMotorSimple.Direction.REVERSE);
-                c.frontRightDirection.set(
-                        DcMotorSimple.Direction.FORWARD);
-                c.backRightDirection.set(
-                        DcMotorSimple.Direction.FORWARD);
-                c.manualBrakeMode.set(true);
-            });
-    public static PinpointConfig localizerConfig =
-            new PinpointConfig(c -> {
-                c.name.set(lancersBotConfig.PINPOINT);
-                // PLACEHOLDERS update when build finishes
-                c.xPodOffset.set(0.0);
-                c.yPodOffset.set(0.0);
-                // Update when build finishes
-                c.xPodDirection.set(
-                        GoBildaPinpointDriver.EncoderDirection.FORWARD);
-                c.yPodDirection.set(
-                        GoBildaPinpointDriver.EncoderDirection.FORWARD);
-            });
+    public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
+        c.frontLeftName.set("frontLeftMotor");
+        c.frontRightName.set("frontRightMotor");
+        c.backLeftName.set("rearLeftMotor");
+        c.backRightName.set("rearRightMotor");
+        c.frontLeftDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    });
+    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
+        c.name.set("odo");
+        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        c.xPodOffset.set(6.965131384181226);
+        c.yPodOffset.set(2.955430999515564);
+        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.globalDistanceUnit.set(DistanceUnit.INCH);
+        c.offsetUnits.set(DistanceUnit.INCH);
+    });
 
     public static ForesightConfig foresightConfig =
             new ForesightConfig(c -> {
