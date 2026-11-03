@@ -30,7 +30,7 @@ public class lancersTeleopController {
     // Hardware
     private GoBildaPinpointDriver odometry;
     private DcMotor outtakeMotor;
-    //private DcMotor outtakeMotorTwo;
+    private DcMotor outtakeMotorTwo;
 
     private Telemetry telemetry;
 
@@ -86,10 +86,9 @@ public class lancersTeleopController {
 
         // Initialize motors
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
-        //outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
+        outtakeMotorTwo = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR_TWO);
         outtakeMotor.setPower(0);
-        //outtakeMotorTwo.setPower(0);
-
+        outtakeMotorTwo.setPower(0);
         // Initialize odometry
         odometry = hardwareMap.get(GoBildaPinpointDriver.class, lancersBotConfig.PINPOINT);
         odometry.setOffsets(0, 0, DistanceUnit.INCH);
@@ -119,6 +118,7 @@ public class lancersTeleopController {
         if (!initialized) {
             return;
         }
+        outtakeMotor.setPower(1.0);
 
         //odometry
         odometry.update();
@@ -137,17 +137,25 @@ public class lancersTeleopController {
         // Toggle intake - gamepad 2 left bumper
         if (gamepad2.left_bumper && !previousIntake) {
             intakeForwardOn = !intakeForwardOn;
+            if (intakeForwardOn) {
+                intakeSubsystem.setIntakePower(0.8);
+            } else {
+                intakeSubsystem.setIntakePower(0.8);
+            }
         }
         previousIntake = gamepad2.left_bumper;
-
-        // hold x to reverse intake
         if (gamepad2.x) {
             intakeSubsystem.setIntakePower(-0.8);
-        } else if (intakeForwardOn) {
-            intakeSubsystem.setIntakePower(0.8);
-        } else {
-            intakeSubsystem.setIntakePower(0.8);
         }
+
+        // hold x to reverse intake
+        //if (gamepad2.x) {
+        //    intakeSubsystem.setIntakePower(-0.8);
+        //} else if (intakeForwardOn) {
+        //    intakeSubsystem.setIntakePower(0.8);
+        //} else {
+        //    intakeSubsystem.setIntakePower(0.8);
+       // }
 
 
         //Toggle feeder wheel - gamepad 2 right bumper
