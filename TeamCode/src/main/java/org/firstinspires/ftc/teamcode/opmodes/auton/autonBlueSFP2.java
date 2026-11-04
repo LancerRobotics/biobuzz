@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.subsystems.turret;
 
 @Autonomous(name = "Blue Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
 public class autonBlueSFP2 extends LinearOpMode{
-    private turret turretSubsystem = new turret();
+//    private turret turretSubsystem = new turret();
 
     private static final double redTargetX = 58.0;
     private static final double redTargetYBelowMidline = 56.0;
@@ -76,7 +76,7 @@ public class autonBlueSFP2 extends LinearOpMode{
     public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        turretSubsystem.init(hardwareMap);
+//        turretSubsystem.init(hardwareMap);
 
         intakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.INTAKE_MOTOR);
         outtakeMotor = hardwareMap.get(DcMotor.class, lancersBotConfig.OUTTAKE_MOTOR);
@@ -100,24 +100,24 @@ public class autonBlueSFP2 extends LinearOpMode{
             double robotHeadingDegrees = Math.toDegrees(follower.pose().heading());
 
             // turret aiming
-            turret.AimSolution aim =
-                    turretSubsystem.calculateAim(
-                            follower.pose().x(), // replace if wanted
-                            follower.pose().y(), // replace if wanted
-                            robotHeadingDegrees,
-                            redTargetX,
-                            redTargetYBelowMidline,
-                            redTargetYAboveMidline
-                    );
-            turretSubsystem.update(aim.targetAngle);
+//            turret.AimSolution aim =
+//                    turretSubsystem.calculateAim(
+//                            follower.pose().x(), // replace if wanted
+//                            follower.pose().y(), // replace if wanted
+//                            robotHeadingDegrees,
+//                            redTargetX,
+//                            redTargetYBelowMidline,
+//                            redTargetYAboveMidline
+//                    );
+//            turretSubsystem.update(aim.targetAngle);
 
             telemetry.addData("x", follower.pose().x()); // replace if wanted
             telemetry.addData("y", follower.pose().y()); // replace if wanted
             telemetry.addData("heading", robotHeadingDegrees);
-            telemetry.addData("Turret target angle", aim.targetAngle);
-            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
-            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
-            telemetry.addData("Distance to target", aim.targetDistance);
+//            telemetry.addData("Turret target angle", aim.targetAngle);
+//            telemetry.addData("Turret current angle", turretSubsystem.getCurrentTurretDegrees());
+//            telemetry.addData("Turret error", turretSubsystem.getErrorDegrees());
+//            telemetry.addData("Distance to target", aim.targetDistance);
 
 
             if(follower.currentPath() != null){
@@ -127,7 +127,7 @@ public class autonBlueSFP2 extends LinearOpMode{
 
             telemetry.update();
         }
-        turretSubsystem.stop();
+//        turretSubsystem.stop();
         intakeMotor.setPower(0);
         outtakeMotor.setPower(0);
         outtakeMotorTwo.setPower(0);
