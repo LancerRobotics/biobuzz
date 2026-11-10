@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
 
 import com.pedropathing.api.Paths;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
@@ -16,14 +16,14 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.subsystems.turret;
-@Autonomous(name = "Blue Auton rear wall", group = "Autonomous")
-public class autonBlueRW extends LinearOpMode {
+
+@Autonomous(name = "Red auton audience wall", group = "Autonomous")
+public class autonRedAW extends LinearOpMode {
 //    private turret turretSubsystem = new turret();
-//must verify constants
-    private static final double blueTargetX = 86.0;
-    private static final double blueTargetYAboveMidline = 83.0;
-    private static final double blueTargetYBelowMidline = 61.0;
+    //must verify constants
+    private static final double redTargetX = 58.0;
+    private static final double redTargetYBelowMidline = 56.0;
+    private static final double redTargetYAboveMidline = 88.0;
 
     private Follower follower;
     private DcMotor intakeMotor;
@@ -31,17 +31,17 @@ public class autonBlueRW extends LinearOpMode {
     private DcMotor outtakeMotorTwo;
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(144-56, 144-8, 90-180);
-    private final Pose path1 = poseFactory.of(144-10.2057, 144-9.7057, 256-180);
-    private final Pose path1Control1 = poseFactory.of(144-41.5224, 144-59.4542, 0-180);
-    private final Pose point2 = poseFactory.of(144-56.1033, 144-122.7827, 270-180);
-    private final Pose point2Control1 = poseFactory.of(144-28.7651, 144-102.2378, 0-180);
-    private final Pose point3 = poseFactory.of(144-49.346, 144-129.7495, 100-180);
-    private final Pose point3Control1 = poseFactory.of(144-66.9006, 144-137.3353, 0-180);
-    private final Pose point4 = poseFactory.of(144-56.1423, 144-122.5448, 270-180);
-    private final Pose point4Control1 = poseFactory.of(144-39.2427, 144-115.4113, 0-180);
-    private final Pose point5 = poseFactory.of(144-12.729, 144-94.269, 270-180);
-    private final Pose point5Control1 = poseFactory.of(144-52.73, 144-102.5819, 0-180);
+    private final Pose start = poseFactory.of(56, 8, 90);
+    private final Pose path1 = poseFactory.of(10.2057, 9.7057, 256);
+    private final Pose path1Control1 = poseFactory.of(41.5224, 59.4542, 0);
+    private final Pose point2 = poseFactory.of(56.1033, 122.7827, 270);
+    private final Pose point2Control1 = poseFactory.of(28.7651, 102.2378, 0);
+    private final Pose point3 = poseFactory.of(49.346, 129.7495, 100);
+    private final Pose point3Control1 = poseFactory.of(66.9006, 137.3353, 0);
+    private final Pose point4 = poseFactory.of(56.1423, 122.5448, 270);
+    private final Pose point4Control1 = poseFactory.of(39.2427, 115.4113, 0);
+    private final Pose point5 = poseFactory.of(12.729, 94.269, 270);
+    private final Pose point5Control1 = poseFactory.of(52.73, 102.5819, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
@@ -97,9 +97,9 @@ public class autonBlueRW extends LinearOpMode {
 //                            robotX,
 //                            robotY,
 //                            robotHeadingDegrees,
-//                            blueTargetX,
-//                            blueTargetYBelowMidline,
-//                            blueTargetYAboveMidline
+//                            redTargetX,
+//                            redTargetYBelowMidline,
+//                            redTargetYAboveMidline
 //                    );
 //            turretSubsystem.update(aim.targetAngle);
 

@@ -1,12 +1,13 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
 
+import static com.pedropathing.api.Paths.curve;
+import static com.pedropathing.api.Paths.line;
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
-import com.pedropathing.api.Paths;
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.ivy.Command;
@@ -19,10 +20,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import org.firstinspires.ftc.teamcode.subsystems.turret;
 
-@Autonomous(name = "Blue Auton p-2 Shoot-Parking", group = "Autonomous")
-public class autonBlueSP2 extends LinearOpMode {
+@Autonomous(name = "Red Auton Shoot-Garden-Shoot-Flower-Shoot-Parking", group = "Autonomous")
+public class autonRedSGSFP extends LinearOpMode{
 //    private turret turretSubsystem = new turret();
 
     private static final double redTargetX = 58.0;
@@ -34,37 +34,69 @@ public class autonBlueSP2 extends LinearOpMode {
     private DcMotor outtakeMotor;
     private DcMotor outtakeMotorTwo;
 
-    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
+    private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(9, 70, 0);
-    private final Pose point1 = poseFactory.of(57.939, 119, 90);
-    private final Pose point1Control1 = poseFactory.of(26, 119, 0);
-    private final Pose point2Start = poseFactory.of(57.939, 119, 90);
-    private final Pose point2 = poseFactory.of(9, 119, 90);
+    private final Pose start = poseFactory.of(59, 11, 270);
+    private final Pose point1 = poseFactory.of(9.7569, 9.079, 265);
+    private final Pose point1Control1 = poseFactory.of(11.9132, 16.5205, 0);
+    private final Pose point2Start = poseFactory.of(9.7569, 9.079, 265);
+    private final Pose point2 = poseFactory.of(58, 117, 90);
+    private final Pose point2Control1 = poseFactory.of(27.576, 117, 0);
+    private final Pose point3Start = poseFactory.of(58, 117, 90);
+    private final Pose point3 = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point3Control1 = poseFactory.of(58, 125, 0);
+    private final Pose point4Start = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point4 = poseFactory.of(58, 117, 90);
+    private final Pose point4Control1 = poseFactory.of(58, 125, 0);
+    private final Pose point5Start = poseFactory.of(58, 117, 90);
+    private final Pose point5 = poseFactory.of(11, 115.1521, 0);
 
     //paths
     public Path path1() {
-        return Paths.curve(start, point1Control1, point1).linear(start, point1);
+        return curve(start, point1Control1, point1).linear(start, point1);
     }
     public Path path2() {
-        return Paths.line(point2Start, point2).linear(point2Start, point2);
+        return curve(point2Start, point2Control1, point2).linear(point2Start, point2);
+    }
+    public Path path3() {
+        return curve(point3Start, point3Control1, point3).linear(point3Start, point3);
+    }
+    public Path path4() {
+        return curve(point4Start, point4Control1, point4).linear(point4Start, point4);
+    }
+    public Path path5() {
+        return line(point5Start, point5).linear(point5Start, point5);
     }
 
-    //sequence
+
+
     public Command autoRoutine(){
         return sequential(
-                instant(() -> outtakeMotor.setPower(0.9)),
-                follow(follower, path1()),
+                instant(()-> outtakeMotor.setPower(0.9)),
                 outtakeOn(),
                 waitMs(2000),
                 outtakeOff(),
-                follow(follower, path2())
+                follow(follower, path1()),
+                intakeOn(),
+                waitMs(2000),
+                intakeOff(),
+                follow(follower, path2()),
+                outtakeOn(),
+                waitMs(2000),
+                outtakeOff(),
+                follow(follower, path3()),
+                intakeOn(),
+                waitMs(2000),
+                intakeOff(),
+                follow(follower, path4()),
+                outtakeOn(),
+                waitMs(2000),
+                outtakeOff(),
+                follow(follower, path5())
         );
     }
-
-    //bot running
     @Override
-    public void runOpMode(){
+    public void runOpMode() {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
 //        turretSubsystem.init(hardwareMap);
@@ -80,6 +112,7 @@ public class autonBlueSP2 extends LinearOpMode {
         follower.update();
         waitForStart();
         schedule(autoRoutine());
+
 
         while (opModeIsActive()){
             follower.update();
@@ -123,7 +156,7 @@ public class autonBlueSP2 extends LinearOpMode {
         outtakeMotorTwo.setPower(0);
     }
 
-    // commands
+        // commands
     private Command intakeOn() {
         return instant(() -> intakeMotor.setPower(1.0));
     }

@@ -1,28 +1,24 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
-
-import static com.pedropathing.api.Paths.curve;
-import static com.pedropathing.api.Paths.line;
-import static com.pedropathing.ivy.Scheduler.schedule;
-import static com.pedropathing.ivy.commands.Commands.instant;
-import static com.pedropathing.ivy.commands.Commands.waitMs;
-import static com.pedropathing.ivy.groups.Groups.sequential;
-import static com.pedropathing.ivy.pedro.PedroCommands.follow;
-
-import com.pedropathing.api.PoseFactory;
-import com.pedropathing.follower.Follower;
-import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
+import static com.pedropathing.api.Paths.*;
 
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.pedropathing.api.PoseFactory;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
+import static com.pedropathing.ivy.Scheduler.schedule;
+import static com.pedropathing.ivy.commands.Commands.*;
+import static com.pedropathing.ivy.groups.Groups.sequential;
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Red Auton Shoot-Garden-Shoot-Flower-Shoot-Parking", group = "Autonomous")
-public class autonRedSGSFP extends LinearOpMode{
+@Autonomous(name = "Red Auton Shoot-Flower-Parking", group = "Autonomous")
+public class autonRedSFP extends LinearOpMode{
 //    private turret turretSubsystem = new turret();
 
     private static final double redTargetX = 58.0;
@@ -37,19 +33,11 @@ public class autonRedSGSFP extends LinearOpMode{
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(59, 11, 270);
-    private final Pose point1 = poseFactory.of(9.7569, 9.079, 265);
-    private final Pose point1Control1 = poseFactory.of(11.9132, 16.5205, 0);
-    private final Pose point2Start = poseFactory.of(9.7569, 9.079, 265);
-    private final Pose point2 = poseFactory.of(58, 117, 90);
-    private final Pose point2Control1 = poseFactory.of(27.576, 117, 0);
-    private final Pose point3Start = poseFactory.of(58, 117, 90);
-    private final Pose point3 = poseFactory.of(52.1924, 129.1177, 115);
-    private final Pose point3Control1 = poseFactory.of(58, 125, 0);
-    private final Pose point4Start = poseFactory.of(52.1924, 129.1177, 115);
-    private final Pose point4 = poseFactory.of(58, 117, 90);
-    private final Pose point4Control1 = poseFactory.of(58, 125, 0);
-    private final Pose point5Start = poseFactory.of(58, 117, 90);
-    private final Pose point5 = poseFactory.of(11, 115.1521, 0);
+    private final Pose point1 = poseFactory.of(12.5902, 42.0679, 135);
+    private final Pose point1Control1 = poseFactory.of(8.8191, 17.9723, 0);
+    private final Pose point2Start = poseFactory.of(12.5902, 42.0679, 135);
+    private final Pose point2 = poseFactory.of(13.1357, 102.323, 90);
+    private final Pose point2Control1 = poseFactory.of(26.5945, 47.1778, 0);
 
     //paths
     public Path path1() {
@@ -58,17 +46,6 @@ public class autonRedSGSFP extends LinearOpMode{
     public Path path2() {
         return curve(point2Start, point2Control1, point2).linear(point2Start, point2);
     }
-    public Path path3() {
-        return curve(point3Start, point3Control1, point3).linear(point3Start, point3);
-    }
-    public Path path4() {
-        return curve(point4Start, point4Control1, point4).linear(point4Start, point4);
-    }
-    public Path path5() {
-        return line(point5Start, point5).linear(point5Start, point5);
-    }
-
-
 
     public Command autoRoutine(){
         return sequential(
@@ -80,19 +57,7 @@ public class autonRedSGSFP extends LinearOpMode{
                 intakeOn(),
                 waitMs(2000),
                 intakeOff(),
-                follow(follower, path2()),
-                outtakeOn(),
-                waitMs(2000),
-                outtakeOff(),
-                follow(follower, path3()),
-                intakeOn(),
-                waitMs(2000),
-                intakeOff(),
-                follow(follower, path4()),
-                outtakeOn(),
-                waitMs(2000),
-                outtakeOff(),
-                follow(follower, path5())
+                follow(follower, path2())
         );
     }
     @Override

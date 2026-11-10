@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
@@ -20,7 +20,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.robot;
-import org.firstinspires.ftc.teamcode.subsystems.turret;
 
 @Autonomous(name = "eRed auton audience wall short", group = "Autonomous")
 public class autonBlueRWSHORT extends LinearOpMode {

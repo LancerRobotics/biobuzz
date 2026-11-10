@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.groups.Groups.sequential;
@@ -18,20 +18,20 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 // import static com.pedropathing.ivy.commands.Commands.*;
 
-@Autonomous(name = "Blue Auton p-2 Parking", group = "Autonomous")
-public class autonBlueP2 extends LinearOpMode {
+@Autonomous(name = "Blue Auton Parking for kryptonite", group = "Autonomous")
+public class autonBluePkryptongooningonani extends LinearOpMode {
 
 
     private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
 
     private Follower follower;
 
-    private final Pose start = poseFactory.of(9, 70, 0);
-    private final Pose point1 = poseFactory.of(9, 118, 0);
+    private final Pose start = poseFactory.of(133.1, 13.3, 90);
+    private final Pose point1 = poseFactory.of(127.7, 19.52, 90);
 
     //paths
     public Path path1() {
-        return Paths.line(start, point1).linear(start, point1);
+        return Paths.curve(start, point1).linear(start, point1);
     }
 
     //sequence
@@ -67,6 +67,7 @@ public class autonBlueP2 extends LinearOpMode {
                 telemetry.addData("Current path distance remaining", follower.distanceToEndpoint());
                 telemetry.addData("Path number", follower.pathIndex());
             }
+
 
             telemetry.update();
         }

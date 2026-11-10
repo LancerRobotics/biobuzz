@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
@@ -20,7 +20,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import org.firstinspires.ftc.teamcode.subsystems.turret;
 
 @Autonomous(name = "Red Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
 public class autonRedSFP2 extends LinearOpMode{

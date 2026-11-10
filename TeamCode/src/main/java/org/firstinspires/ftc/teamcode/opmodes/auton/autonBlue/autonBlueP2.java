@@ -1,38 +1,37 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton;
-
-import com.pedropathing.api.Paths;
-
-import com.pedropathing.api.PoseFactory;
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import com.pedropathing.follower.Follower;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
-import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
-// import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
+import com.pedropathing.api.Paths;
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Red Auton Parking", group = "Autonomous")
-public class autonRedP extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+
+// import static com.pedropathing.ivy.commands.Commands.*;
+
+@Autonomous(name = "Blue Auton p-2 Parking", group = "Autonomous")
+public class autonBlueP2 extends LinearOpMode {
 
 
-    private final PoseFactory poseFactory = PoseFactory.degrees();
+    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75).mirrorY(70.75);
 
     private Follower follower;
 
-    private final Pose start = poseFactory.of(59, 11, 270);
-    private final Pose point1 = poseFactory.of(13.0765, 106.2534, 270);
-    private final Pose point1Control1 = poseFactory.of(25.1546, 11.768, 0);
-    private final Pose point1Control2 = poseFactory.of(14.195, 30.5945, 0);
+    private final Pose start = poseFactory.of(9, 70, 0);
+    private final Pose point1 = poseFactory.of(9, 118, 0);
 
     //paths
     public Path path1() {
-        return Paths.curve(start, point1Control1, point1Control2, point1).linear(start, point1);
+        return Paths.line(start, point1).linear(start, point1);
     }
 
     //sequence
