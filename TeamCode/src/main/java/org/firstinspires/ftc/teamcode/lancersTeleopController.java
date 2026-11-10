@@ -5,7 +5,6 @@ import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -147,16 +146,6 @@ public class lancersTeleopController {
         if (gamepad2.x) {
             intakeSubsystem.setIntakePower(-0.8);
         }
-
-        // hold x to reverse intake
-        //if (gamepad2.x) {
-        //    intakeSubsystem.setIntakePower(-0.8);
-        //} else if (intakeForwardOn) {
-        //    intakeSubsystem.setIntakePower(0.8);
-        //} else {
-        //    intakeSubsystem.setIntakePower(0.8);
-       // }
-
 
         //Toggle feeder wheel - gamepad 2 right bumper
         if (gamepad2.right_bumper && !previousOuttakeTwo) {
