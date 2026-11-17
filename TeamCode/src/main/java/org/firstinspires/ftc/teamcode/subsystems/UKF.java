@@ -73,7 +73,12 @@ public class UKF {
     /** Forward speed cap before wheel normalization (m/s). */
     public static final double MAX_LINEAR_SPEED = 1.0;
     /** Distance at which the robot is considered arrived and stops (m). */
-    public static final double ARRIVAL_TOLERANCE = 0.02;
+    public static final double ARRIVAL_TOLERANCE = 0.01;
+    /**
+     * Once arrived, the robot stays stopped until the estimate drifts farther than this (m).
+     * Must exceed the estimate's position noise (~1-2 cm RMS) or the robot will dither in place.
+     */
+    public static final double ARRIVAL_RELEASE = 0.05;
     /** |omega| below this uses the straight-line limit of the motion model (rad/s). */
     private static final double OMEGA_EPS = 1e-6;
 
@@ -168,6 +173,7 @@ public class UKF {
     private double commandedV = 0.0;      // m/s, input for the next prediction
     private double commandedOmega = 0.0;  // rad/s, input for the next prediction
     private MotorCommands motorCommands = new MotorCommands(0, 0, 0, 0);
+    private boolean arrived = false;
 
     private double lastTimestamp = Double.NaN;
     private long cycle = 0;
@@ -336,9 +342,17 @@ public class UKF {
         double dy = targetY - x[1];
         double distance = Math.hypot(dx, dy);
 
+        // Hysteresis: latch "arrived" inside the tolerance, release only past ARRIVAL_RELEASE,
+        // so estimate noise near the target does not toggle the motors on and off.
+        if (arrived && distance > ARRIVAL_RELEASE) {
+            arrived = false;
+        } else if (!arrived && distance < ARRIVAL_TOLERANCE) {
+            arrived = true;
+        }
+
         double v;
         double omega;
-        if (distance < ARRIVAL_TOLERANCE) {
+        if (arrived) {
             v = 0.0;
             omega = 0.0;
         } else {

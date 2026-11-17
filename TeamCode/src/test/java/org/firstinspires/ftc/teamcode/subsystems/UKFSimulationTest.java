@@ -71,6 +71,41 @@ public class UKFSimulationTest {
         }
     }
 
+    /** Once arrived the robot stays stopped inside ARRIVAL_RELEASE and resumes only beyond it. */
+    @Test
+    public void arrivalLatchHoldsUntilReleaseDistance() {
+        UKF ukf = new UKF(0, 0, 0, null);
+        double t = 0;
+        // Phase 1: readings sit on the target, so the robot must arrive and stop.
+        for (int k = 0; k < 200; k++, t += DT) {
+            ukf.ingest(new UKF.SensorReading(t, UKF.TARGET_DISTANCE, 0, 0));
+        }
+        assertStopped("on target", ukf.getMotorCommands());
+
+        // Phase 2: drift past the tolerance but inside the release distance; it must stay stopped.
+        double inside = UKF.TARGET_DISTANCE + 0.5 * (UKF.ARRIVAL_TOLERANCE + UKF.ARRIVAL_RELEASE);
+        for (int k = 0; k < 200; k++, t += DT) {
+            ukf.ingest(new UKF.SensorReading(t, inside, 0, 0));
+            assertStopped("inside release distance (cycle " + k + ")", ukf.getMotorCommands());
+        }
+
+        // Phase 3: drift well beyond the release distance; it must drive again.
+        double outside = UKF.TARGET_DISTANCE + 3 * UKF.ARRIVAL_RELEASE;
+        boolean moved = false;
+        for (int k = 0; k < 200 && !moved; k++, t += DT) {
+            ukf.ingest(new UKF.SensorReading(t, outside, 0, 0));
+            moved = ukf.getMotorCommands().frontLeft != 0.0;
+        }
+        assertTrue("robot should resume driving beyond ARRIVAL_RELEASE", moved);
+    }
+
+    private static void assertStopped(String when, UKF.MotorCommands c) {
+        assertEquals(when + ": FL", 0.0, c.frontLeft, 0.0);
+        assertEquals(when + ": FR", 0.0, c.frontRight, 0.0);
+        assertEquals(when + ": RL", 0.0, c.rearLeft, 0.0);
+        assertEquals(when + ": RR", 0.0, c.rearRight, 0.0);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void rejectsTimestampsGoingBackwards() {
         UKF ukf = new UKF(0, 0, 0, null);
