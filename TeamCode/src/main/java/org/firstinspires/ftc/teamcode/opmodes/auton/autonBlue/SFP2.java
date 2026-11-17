@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
@@ -21,35 +21,30 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name = "Red Auton Shoot-Garden-Shoot-Flower-Shoot-Parking", group = "Autonomous")
-public class autonRedSGSFP extends LinearOpMode{
+@Autonomous(name = "Blue Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
+public class SFP2 extends LinearOpMode{
 //    private turret turretSubsystem = new turret();
 
-    private static final double redTargetX = 58.0;
-    private static final double redTargetYBelowMidline = 56.0;
-    private static final double redTargetYAboveMidline = 88.0;
+//    private static final double blueTargetX = 86.0;
+//    private static final double blueTargetYAboveMidline = 83.0;
+//    private static final double blueTargetYBelowMidline = 61.0;
 
     private Follower follower;
     private DcMotor intakeMotor;
     private DcMotor outtakeMotor;
     private DcMotor outtakeMotorTwo;
 
-    private final PoseFactory poseFactory = PoseFactory.degrees();
+    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
 
-    private final Pose start = poseFactory.of(59, 11, 270);
-    private final Pose point1 = poseFactory.of(9.7569, 9.079, 265);
-    private final Pose point1Control1 = poseFactory.of(11.9132, 16.5205, 0);
-    private final Pose point2Start = poseFactory.of(9.7569, 9.079, 265);
-    private final Pose point2 = poseFactory.of(58, 117, 90);
-    private final Pose point2Control1 = poseFactory.of(27.576, 117, 0);
-    private final Pose point3Start = poseFactory.of(58, 117, 90);
-    private final Pose point3 = poseFactory.of(52.1924, 129.1177, 115);
-    private final Pose point3Control1 = poseFactory.of(58, 125, 0);
-    private final Pose point4Start = poseFactory.of(52.1924, 129.1177, 115);
-    private final Pose point4 = poseFactory.of(58, 117, 90);
-    private final Pose point4Control1 = poseFactory.of(58, 125, 0);
-    private final Pose point5Start = poseFactory.of(58, 117, 90);
-    private final Pose point5 = poseFactory.of(11, 115.1521, 0);
+    private final Pose start = poseFactory.of(9, 70, 0);
+    private final Pose point1 = poseFactory.of(57.939, 119, 90);
+    private final Pose point1Control1 = poseFactory.of(26, 119, 0);
+    private final Pose point2Start = poseFactory.of(57.939, 119, 90);
+    private final Pose point2 = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point2Control1 = poseFactory.of(58, 125, 0);
+    private final Pose point3Start = poseFactory.of(52.1924, 129.1177, 115);
+    private final Pose point3 = poseFactory.of(9, 118, 90);
+    private final Pose point3Control1 = poseFactory.of(48.6314, 118, 0);
 
     //paths
     public Path path1() {
@@ -61,38 +56,19 @@ public class autonRedSGSFP extends LinearOpMode{
     public Path path3() {
         return curve(point3Start, point3Control1, point3).linear(point3Start, point3);
     }
-    public Path path4() {
-        return curve(point4Start, point4Control1, point4).linear(point4Start, point4);
-    }
-    public Path path5() {
-        return line(point5Start, point5).linear(point5Start, point5);
-    }
-
-
 
     public Command autoRoutine(){
         return sequential(
                 instant(()-> outtakeMotor.setPower(0.9)),
-                outtakeOn(),
-                waitMs(2000),
-                outtakeOff(),
                 follow(follower, path1()),
-                intakeOn(),
+                outtakeOn(),
                 waitMs(2000),
-                intakeOff(),
+                outtakeOff(),
                 follow(follower, path2()),
-                outtakeOn(),
-                waitMs(2000),
-                outtakeOff(),
-                follow(follower, path3()),
                 intakeOn(),
                 waitMs(2000),
                 intakeOff(),
-                follow(follower, path4()),
-                outtakeOn(),
-                waitMs(2000),
-                outtakeOff(),
-                follow(follower, path5())
+                follow(follower, path3())
         );
     }
     @Override

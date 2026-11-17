@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
@@ -21,20 +21,20 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.config.lancersBotConfig;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name = "Blue Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
-public class autonBlueSFP2 extends LinearOpMode{
+@Autonomous(name = "Red Auton p-2 Shoot-Flower-Parking", group = "Autonomous")
+public class SFP2 extends LinearOpMode{
 //    private turret turretSubsystem = new turret();
 
-    private static final double redTargetX = 58.0;
-    private static final double redTargetYBelowMidline = 56.0;
-    private static final double redTargetYAboveMidline = 88.0;
+//    private static final double redTargetX = 58.0;
+//    private static final double redTargetYBelowMidline = 56.0;
+//    private static final double redTargetYAboveMidline = 88.0;
 
     private Follower follower;
     private DcMotor intakeMotor;
     private DcMotor outtakeMotor;
     private DcMotor outtakeMotorTwo;
 
-    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
+    private final PoseFactory poseFactory = PoseFactory.degrees();
 
     private final Pose start = poseFactory.of(9, 70, 0);
     private final Pose point1 = poseFactory.of(57.939, 119, 90);

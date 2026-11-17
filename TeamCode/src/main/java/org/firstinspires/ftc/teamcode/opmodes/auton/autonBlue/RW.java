@@ -18,12 +18,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name = "Blue Auton rear wall", group = "Autonomous")
-public class autonBlueRW extends LinearOpMode {
+public class RW extends LinearOpMode {
 //    private turret turretSubsystem = new turret();
 //must verify constants
-    private static final double blueTargetX = 86.0;
-    private static final double blueTargetYAboveMidline = 83.0;
-    private static final double blueTargetYBelowMidline = 61.0;
+//    private static final double blueTargetX = 86.0;
+//    private static final double blueTargetYAboveMidline = 83.0;
+//    private static final double blueTargetYBelowMidline = 61.0;
 
     private Follower follower;
     private DcMotor intakeMotor;

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.groups.Groups.sequential;
@@ -18,11 +18,11 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 // import static com.pedropathing.ivy.commands.Commands.*;
 
-@Autonomous(name = "Red Auton p-2 Parking", group = "Autonomous")
-public class autonRedP2 extends LinearOpMode {
+@Autonomous(name = "Blue Auton p-2 Parking", group = "Autonomous")
+public class P2 extends LinearOpMode {
 
 
-    private final PoseFactory poseFactory = PoseFactory.degrees();
+    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
 
     private Follower follower;
 

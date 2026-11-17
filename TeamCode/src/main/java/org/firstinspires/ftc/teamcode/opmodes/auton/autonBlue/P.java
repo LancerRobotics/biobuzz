@@ -1,27 +1,28 @@
-package org.firstinspires.ftc.teamcode.opmodes.auton.autonRed;
-
-import com.pedropathing.api.Paths;
-
-import com.pedropathing.api.PoseFactory;
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import com.pedropathing.follower.Follower;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
-import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
+package org.firstinspires.ftc.teamcode.opmodes.auton.autonBlue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
-// import static com.pedropathing.ivy.commands.Commands.*;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+
+import com.pedropathing.api.Paths;
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Red Auton Parking", group = "Autonomous")
-public class autonRedP extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+
+// import static com.pedropathing.ivy.commands.Commands.*;
+
+@Autonomous(name = "Blue Auton Parking", group = "Autonomous")
+public class P extends LinearOpMode {
 
 
-    private final PoseFactory poseFactory = PoseFactory.degrees();
+    private final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
 
     private Follower follower;
 
@@ -68,6 +69,7 @@ public class autonRedP extends LinearOpMode {
                 telemetry.addData("Current path distance remaining", follower.distanceToEndpoint());
                 telemetry.addData("Path number", follower.pathIndex());
             }
+
 
             telemetry.update();
         }
