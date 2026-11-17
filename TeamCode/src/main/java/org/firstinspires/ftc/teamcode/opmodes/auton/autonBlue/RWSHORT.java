@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.robot;
 
 @Autonomous(name = "Blue auton audience wall short", group = "Autonomous")
-public class autonBlueRWSHORT extends LinearOpMode {
+public class RWSHORT extends LinearOpMode {
     //private turret turretSubsystem = new turret();
     //must verify constants
     private static final double blueTargetX = 86.0;
