@@ -47,6 +47,7 @@ public class UKF {
 
     // ---------------------------------------------------------------------------------------
     // Measurement noise R: one parameter for odometry XY, one for heading.
+    // Adjust based on irl tests
     // ---------------------------------------------------------------------------------------
     public static final double R_ODOM_XY = 0.05 * 0.05;   // m^2   (odometry X and Y)
     public static final double R_HEADING = Math.toRadians(3.0) * Math.toRadians(3.0); // rad^2
@@ -61,11 +62,11 @@ public class UKF {
     // Drive / controller constants.
     // ---------------------------------------------------------------------------------------
     /** Distance of the target straight ahead of the starting pose (m). */
-    public static final double TARGET_DISTANCE = 5.0;
+    public static final double TARGET_DISTANCE = 1.0;
     /** Left-to-right wheel spacing (m). */
-    public static final double TRACK_WIDTH = 0.35;
+    public static final double TRACK_WIDTH = 0.35; // MEASURE WHEN DRIVETRAIN DONE
     /** Wheel surface speed at motor power 1.0 (m/s). */
-    public static final double MAX_WHEEL_SPEED = 1.5;
+    public static final double MAX_WHEEL_SPEED = 1.5; //MEASURE WHEN DONE
     /** Proportional gain on distance-to-target (1/s). */
     public static final double KP_LINEAR = 0.8;
     /** Proportional gain on bearing-to-target error (1/s). */
